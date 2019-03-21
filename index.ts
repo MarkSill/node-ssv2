@@ -24,7 +24,7 @@ function printObject(obj: any, keys: (number | string)[], indentation: number, o
 			objects.push(v);
 			let str = iSerialize(v, indentation + 1, objects, options);
 			if (str.length === 0) {
-				v = "{}";
+				continue;
 			} else {
 				v = `\n${str}`;
 				if (v.endsWith("\n")) {
