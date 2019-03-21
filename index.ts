@@ -14,12 +14,6 @@ function printObject(obj: any, keys: (number | string)[], indentation: number, o
 	for (let key of keys) {
 		let k: number | string | undefined = key;
 		let v = obj[k];
-		if (typeof k === "number") {
-			if (k === numeric) {
-				numeric++;
-				k = undefined;
-			}
-		}
 		let table = false;
 		if (typeof v === "function") {
 			continue;
@@ -29,7 +23,6 @@ function printObject(obj: any, keys: (number | string)[], indentation: number, o
 			}
 			objects.push(v);
 			let str = iSerialize(v, indentation + 1, objects, options);
-			// continue if empty?
 			if (str.length === 0) {
 				v = "{}";
 			} else {
@@ -45,6 +38,16 @@ function printObject(obj: any, keys: (number | string)[], indentation: number, o
 			v = v.replace("\"", "\\\"");
 		}
 
+		if (v === undefined || v === null) {
+			continue;
+		}
+		if (typeof k === "number") {
+			if (k === numeric) {
+				numeric++;
+				k = undefined;
+			}
+		}
+
 		let str = "";
 		for (let i = 0; i < indentation; i++) {
 			str += "\t";
@@ -53,11 +56,7 @@ function printObject(obj: any, keys: (number | string)[], indentation: number, o
 		if (!options.minify && !table) {
 			str += " ";
 		}
-		if (v === undefined || v === null) {
-			continue;
-		} else {
-			str += v.toString();
-		}
+		str += v.toString();
 		if (outStr.length !== 0) {
 			str = `\n${str}`
 		}
