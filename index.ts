@@ -20,6 +20,7 @@ function printObject(obj: any, keys: (number | string)[], indentation: number, o
 				k = undefined;
 			}
 		}
+		let table = false;
 		if (typeof v === "function") {
 			continue;
 		} else if (isObject(v)) {
@@ -33,6 +34,10 @@ function printObject(obj: any, keys: (number | string)[], indentation: number, o
 				v = "{}";
 			} else {
 				v = `\n${str}`;
+				if (v.endsWith("\n")) {
+					v = v.substr(0, v.length - 1);
+				}
+				table = true;
 			}
 		} else if (typeof v === "string") {
 			v = v.replace("\\", "\\\\");
@@ -45,7 +50,7 @@ function printObject(obj: any, keys: (number | string)[], indentation: number, o
 			str += "\t";
 		}
 		str += k === undefined ? "-" : `${k}:`;
-		if (!options.minify) {
+		if (!options.minify && !table) {
 			str += " ";
 		}
 		if (v === undefined || v === null) {
@@ -159,6 +164,11 @@ function iDeserialize(lines: string[], index: number): [any, number] {
 			continue;
 		}
 		if (ind < indentation) {
+			if (Object.keys(obj).length === 0) {
+				obj = numericValues;
+			} else if (numericValues.length !== 0) {
+				obj._numeric = numericValues;
+			}
 			return [obj, i];
 		} else if (ind > indentation) {
 			let [o, jump] = iDeserialize(lines, i);
@@ -202,7 +212,7 @@ function iDeserialize(lines: string[], index: number): [any, number] {
 	}
 	if (Object.keys(obj).length === 0) {
 		obj = numericValues;
-	} else {
+	} else if (numericValues.length !== 0) {
 		obj._numeric = numericValues;
 	}
 	return [obj, lines.length];
