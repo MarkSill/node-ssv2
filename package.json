@@ -1,5 +1,5 @@
 {
-	"name": "SSv2",
+	"name": "ssv2",
 	"author": "MarkSill",
 	"version": "1.0.0",
 	"description": "Node package for the SSv2 file format.",
