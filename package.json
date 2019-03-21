@@ -1,18 +1,25 @@
 {
-	"name": "node-ssv2",
+	"name": "SSv2",
+	"author": "MarkSill",
 	"version": "1.0.0",
 	"description": "Node package for the SSv2 file format.",
+	"license": "MIT",
 	"scripts": {
 		"build": "tsc",
 		"watch": "tsc -w",
 		"test": "node test.js"
 	},
-	"author": "MarkSill",
-	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/MarkSill/node-ssv2"
+	},
 	"devDependencies": {
 		"@types/mz": "0.0.32",
 		"mz": "^2.7.0",
 		"typescript": "^3.3.4000"
 	},
-	"dependencies": {}
+	"bugs": {
+		"url": "https://github.com/MarkSill/node-ssv2/issues"
+	},
+	"homepage": "https://github.com/MarkSill/node-ssv2"
 }

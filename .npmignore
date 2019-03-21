@@ -1,0 +1,5 @@
+*.js.map
+*.ts
+tsconfig.json
+.travis.yml
+test.js
