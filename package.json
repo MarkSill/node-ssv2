@@ -1,7 +1,7 @@
 {
 	"name": "ssv2",
 	"author": "MarkSill",
-	"version": "1.2.2",
+	"version": "1.2.3",
 	"description": "Node package for the SSv2 file format.",
 	"license": "MIT",
 	"scripts": {
